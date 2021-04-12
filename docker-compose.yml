@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  personalfinancetracker.accounts.api:
+    image: ${DOCKER_REGISTRY-}personalfinancetrackeraccountsapi
+    build:
+      context: .
+      dockerfile: src/Services/Accounts/PersonalFinanceTracker.Accounts.Api/Dockerfile
+    ports:
+        - 32001:80
+    container_name: accountsapi
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+        - 1433:1433
+    environment:
+        SA_PASSWORD: "Super!Complex!Password1234"
+        ACCEPT_EULA: "Y"
+    volumes:
+        - ./volumes/mssql-data:/var/opt/mssql/data
+        - ./volumes/mssql-logs:/var/opt/mssql/log
+        - ./volumes/mssql-secrets:/var/opt/mssql/secrets
+    container_name: sqlserver
+
+  sqlserverscripts:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+        - sqlserver
+    command: /bin/bash -c 'until /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "Super!Complex!Password1234" -Q "create database Keycloak"; do sleep 5; done'
+    container_name: sqlserverscripts
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    depends_on:
+        - sqlserver
+        - sqlserverscripts
+    ports:
+        - "8080:8080"
+    environment:
+        - KEYCLOAK_USER=admin
+        - KEYCLOAK_PASSWORD=admin
+        - DB_VENDOR=mssql
+        - DB_USER=sa
+        - DB_PASSWORD=Super!Complex!Password1234
+        - DB_ADDR=sqlserver
+        - DB_DATABASE=Keycloak
+        - Dkeycloak.profile.feature.upload_scripts=enabled
+    container_name: keycloak

@@ -3,9 +3,68 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8F7234CD-5734-4357-AC5A-1366D56AE904}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E1DEB46E-C578-444D-A1A5-BEB26F381D8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Accounts", "Accounts", "{A35887BD-42C5-4871-BED9-81B9BCE806D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D1E22A0A-E85B-4E13-9E3A-FD2D3441E6A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4513D1B7-42AE-4BA1-9C05-5B31667DEC8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3238B0C5-CA68-4259-B354-84298D2B79EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFinanceTracker.Accounts.Api", "src\Services\Accounts\PersonalFinanceTracker.Accounts.Api\PersonalFinanceTracker.Accounts.Api.csproj", "{70ED759B-4119-41C3-9B0C-192233E97F76}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5A24CA4A-751F-46A4-AB71-47CC42C2629C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceTracker.Accounts.Domain", "src\Services\Accounts\PersonalFinanceTracker.Accounts.Domain\PersonalFinanceTracker.Accounts.Domain.csproj", "{E25B9A06-9E84-4487-B6C6-27632A4064B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceTracker.Accounts.Application", "src\Services\Accounts\PersonalFinanceTracker.Accounts.Application\PersonalFinanceTracker.Accounts.Application.csproj", "{E02ED75C-8BF7-452B-863D-C4A76125C5FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceTracker.Accounts.Infrastructure", "src\Services\Accounts\PersonalFinanceTracker.Accounts.Infrastructure\PersonalFinanceTracker.Accounts.Infrastructure.csproj", "{96D59045-0669-4D61-BB1D-D98C2158F05C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70ED759B-4119-41C3-9B0C-192233E97F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70ED759B-4119-41C3-9B0C-192233E97F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70ED759B-4119-41C3-9B0C-192233E97F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70ED759B-4119-41C3-9B0C-192233E97F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A24CA4A-751F-46A4-AB71-47CC42C2629C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A24CA4A-751F-46A4-AB71-47CC42C2629C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A24CA4A-751F-46A4-AB71-47CC42C2629C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A24CA4A-751F-46A4-AB71-47CC42C2629C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E25B9A06-9E84-4487-B6C6-27632A4064B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E25B9A06-9E84-4487-B6C6-27632A4064B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E25B9A06-9E84-4487-B6C6-27632A4064B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E25B9A06-9E84-4487-B6C6-27632A4064B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E02ED75C-8BF7-452B-863D-C4A76125C5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E02ED75C-8BF7-452B-863D-C4A76125C5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E02ED75C-8BF7-452B-863D-C4A76125C5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E02ED75C-8BF7-452B-863D-C4A76125C5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D59045-0669-4D61-BB1D-D98C2158F05C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D59045-0669-4D61-BB1D-D98C2158F05C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D59045-0669-4D61-BB1D-D98C2158F05C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D59045-0669-4D61-BB1D-D98C2158F05C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E1DEB46E-C578-444D-A1A5-BEB26F381D8F} = {8F7234CD-5734-4357-AC5A-1366D56AE904}
+		{A35887BD-42C5-4871-BED9-81B9BCE806D2} = {E1DEB46E-C578-444D-A1A5-BEB26F381D8F}
+		{D1E22A0A-E85B-4E13-9E3A-FD2D3441E6A1} = {A35887BD-42C5-4871-BED9-81B9BCE806D2}
+		{4513D1B7-42AE-4BA1-9C05-5B31667DEC8F} = {A35887BD-42C5-4871-BED9-81B9BCE806D2}
+		{3238B0C5-CA68-4259-B354-84298D2B79EF} = {A35887BD-42C5-4871-BED9-81B9BCE806D2}
+		{70ED759B-4119-41C3-9B0C-192233E97F76} = {3238B0C5-CA68-4259-B354-84298D2B79EF}
+		{E25B9A06-9E84-4487-B6C6-27632A4064B2} = {D1E22A0A-E85B-4E13-9E3A-FD2D3441E6A1}
+		{E02ED75C-8BF7-452B-863D-C4A76125C5FB} = {D1E22A0A-E85B-4E13-9E3A-FD2D3441E6A1}
+		{96D59045-0669-4D61-BB1D-D98C2158F05C} = {4513D1B7-42AE-4BA1-9C05-5B31667DEC8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6424970A-97B4-488C-877B-99ED692A67F9}

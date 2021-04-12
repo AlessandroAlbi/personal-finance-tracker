@@ -1,0 +1,209 @@
+/* Global variables */
+:root {
+  font-size: 14px;
+  font-family: "Open Sans";
+  --text-primary: #ffffff;
+  --text-secondary: #3c3d41;
+  --bg-primary: #131316;
+  --bg-secondary: #24252b;
+  --trend-up: #00ffbd;
+  --trend-down: #a155ff;
+  --transition-speed: 600ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: var(--bg-primary);
+  color: white;
+  /* grid container settings */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+}
+
+.App-header {
+  grid-area: header;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: 0px;
+  padding: 1em;
+  background: linear-gradient(77deg, var(--trend-up), var(--trend-down));
+  background-size: 400% 400%;
+  animation: gradient-animation 13s ease infinite;
+  border-radius: 0 0 8px 8px;
+}
+
+.Main-container {
+  padding: 0px;
+  padding: 1em;
+}
+
+.Main-nav ul {
+  margin: 1em 0 0.5em;
+  text-align: center;
+}
+.Main-nav li {
+  display: inline;
+}
+.Main-nav a {
+  display: inline-block;
+  padding: 0.5em 1.5em;
+}
+
+.App-title {
+  font-weight: 500;
+  margin: 0px;
+  color: var(--text-primary);
+}
+
+.Dashboard {
+  grid-area: main;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.Page-title {
+  font-size: 3em;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.Total-recap-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: var(--bg-secondary);
+  padding: 1em;
+  border-radius: 8px;
+}
+
+.Total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Prev-month {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Total-money {
+  font-weight: 400;
+}
+
+.Month-percentage {
+  margin-left: 1em;
+  font-weight: 400;
+}
+
+.Main-chart-container {
+  margin-top: 1em;
+  background-color: var(--bg-secondary);
+  padding: 1em;
+  border-radius: 8px;
+}
+
+.Accounts-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.Account-container {
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  margin: 1em;
+  padding: 1%;
+}
+
+.Account-name {
+  color: white;
+  font-weight: 400;
+}
+
+.Account-trend {
+  color: var(--trend-up);
+}
+
+.Dashboard-component:hover {
+  background: linear-gradient(77deg, #00ffbb18, #a155ff2a);
+  background-size: 400% 400%;
+  animation: gradient-animation 13s ease infinite;
+}
+
+.Movements-container {
+  /* grid container settings */
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "top"
+    "list";
+}
+
+.Add-movement-button {
+  grid-area: top;
+  font-size: 16px;
+  border-radius: 8px;
+  border-style: none;
+  background-color: var(--trend-up);
+  color: white;
+  font-weight: 600;
+  outline: none;
+}
+
+.Add-movement-button:hover {
+  background: linear-gradient(90deg, var(--trend-up), var(--trend-down));
+  background-size: 400% 400%;
+  animation: gradient-animation 4s ease infinite;
+}
+
+.Add-movement-button:active {
+  transform: scale(0.98);
+  background-color: var(--trend-down);
+  border-style: none;
+}
+
+/* Animations */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 86%;
+  }
+  50% {
+    background-position: 100% 15%;
+  }
+  100% {
+    background-position: 0% 86%;
+  }
+}
