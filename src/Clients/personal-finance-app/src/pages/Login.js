@@ -7,7 +7,7 @@ async function loginUser(username, password) {
     password: password,
     grant_type: "password",
     client_id: "react-app",
-    scope: "openid"
+    scope: "openid",
   };
 
   var formBody = [];
@@ -27,7 +27,14 @@ async function loginUser(username, password) {
       },
       body: formBody,
     }
-  ).then((data) => data.json());
+  )
+    .then(function (response) {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch((err) => "err");
 }
 
 export default function Login({ setToken }) {
@@ -36,11 +43,11 @@ export default function Login({ setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser(
-      username,
-      password,
-    );
-    setToken(token);
+    const token = await loginUser(username, password);
+
+    if (token !== "err") {
+      setToken(token);
+    }
   };
 
   return (

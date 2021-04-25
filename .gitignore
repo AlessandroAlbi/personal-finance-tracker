@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # Docker volumes data folder
 volumes/
+/src/Clients/personal-finance-app/.vscode
