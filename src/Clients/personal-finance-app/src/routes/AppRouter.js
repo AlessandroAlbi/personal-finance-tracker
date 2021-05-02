@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Movements from "../pages/Movements";
 
-function AppRouter() {
+function AppRouter({token}) {
   return (
     <BrowserRouter>
       <div className="App">
@@ -23,7 +23,12 @@ function AppRouter() {
         </header>
         <main className="Main-container">
           <Switch>
-            <Route exact path="/" component={Dashboard} />
+            <Route 
+                exact path="/" 
+                render={() => (
+                  <Dashboard token={token} />
+                )}
+            />
             <Route path="/movements" component={Movements} />
           </Switch>
         </main>

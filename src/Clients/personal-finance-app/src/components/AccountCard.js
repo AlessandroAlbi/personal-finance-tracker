@@ -2,10 +2,10 @@ import React from 'react';
 import * as V from 'victory';
 import { VictoryChart, VictoryArea, VictoryTheme} from 'victory';
 
-export default function AccountCard() {
+export default function AccountCard({name}) {
     return (
         <div className="Account-card">
-            <h2 className="Account-name">PayPal</h2>
+            <h2 className="Account-name">{name}</h2>
             <h4 className="Account-trend">+50%</h4>
             <VictoryChart
                 theme={VictoryTheme.grayscale}

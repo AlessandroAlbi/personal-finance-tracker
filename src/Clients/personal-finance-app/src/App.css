@@ -47,6 +47,69 @@ body::-webkit-scrollbar-thumb {
   background: var(--bg-secondary);
 }
 
+
+.login-container {
+  grid-area: main;
+  padding-top: 16em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.login-container-left {
+
+
+}
+
+.login-title{
+  font-size: 5em;
+
+}
+
+.login-subtitle {
+    background: linear-gradient(77deg, var(--trend-up), var(--trend-down));
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
+
+.login-container-right label {
+  font-size: 2em;
+}
+
+.login input {
+  background: transparent;
+  border-width: 0 0 2px;
+  color: var(--trend-up);
+  font-size: 1em;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+}
+
+.login input:hover {
+  background: transparent;
+  border-width: 0 0 2px;
+  border-color: var(--trend-up);
+}
+
+.login button {
+  background: transparent;
+  border: 0;
+  color: #f2f2f2;
+  font-size: 20px;
+  height: 30px;
+  width: 100%;
+  margin-top: 2em;
+}
+
+.login button:hover {
+  color: var(--trend-up);
+}
+
 .App-header {
   grid-area: header;
 

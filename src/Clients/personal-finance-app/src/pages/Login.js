@@ -47,23 +47,45 @@ export default function Login({ setToken }) {
 
     if (token !== "err") {
       setToken(token);
+    } else {
+      window.location.reload();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <p>Username</p>
-        <input type="text" onChange={(e) => setUserName(e.target.value)} />
-      </label>
-      <label>
-        <p>Password</p>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-      </label>
-      <div>
-        <button type="submit">Submit</button>
+    <div className="login-container">
+      <div className="login-container-left">
+        <h1 className="login-title">Login</h1>
+        <h2 className="login-subtitle">
+          Personal Finance Tracker
+        </h2>
       </div>
-    </form>
+      <div className="login-container-right">
+        <form className="login" onSubmit={handleSubmit}>
+          <label>
+            <p>Username</p>
+            <input
+              className="username"
+              type="text"
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </label>
+          <label>
+            <p>Password</p>
+            <input
+              className="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <div>
+            <button type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 

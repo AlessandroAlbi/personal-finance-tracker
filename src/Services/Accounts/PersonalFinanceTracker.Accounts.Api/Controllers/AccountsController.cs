@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinanceTracker.Accounts.Api.Controllers
 {
-    [Route("api/Users/{userId}/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : ControllerBase
     {
@@ -33,8 +33,9 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         [Authorize]
         [ProducesResponseType(typeof(IEnumerable<AccountDto>), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccounts(Guid userGuid)
+        public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccounts()
         {
+            var userGuid = new Guid("2090d106-eb86-4b82-9022-56f4ce652d85");
             var accounts = mapper.Map<IEnumerable<AccountDto>>(await _context.Accounts.Where(a => a.UserGuid == userGuid).ToListAsync());
 
             if (!accounts.Any())
@@ -43,13 +44,13 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
             return Ok(accounts);
         }
 
-        [HttpGet("{userGuid}")]
-        [Authorize]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(AccountDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<AccountDto>> GetAccount(Guid userGuid, long id)
+        public async Task<ActionResult<AccountDto>> GetAccount(long id)
         {
+            var userGuid = Guid.NewGuid();
             var account = mapper.Map<AccountDto>(await _context.Accounts.Where(a => a.UserGuid == userGuid && a.Id == id).FirstOrDefaultAsync());
 
             if (account == null)
@@ -58,13 +59,13 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
             return account;
         }
 
-        [HttpPut("{userGuid}")]
-        [Authorize]
+        [HttpPut]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AccountDto>> PutAccount(Guid userGuid, long id, AccountForUpdateDto accountForUpdate)
+        public async Task<ActionResult<AccountDto>> PutAccount(long id, AccountForUpdateDto accountForUpdate)
         {
+            var userGuid = Guid.NewGuid();
             var account = mapper.Map<Account>(accountForUpdate);
 
             if (id != account.Id || userGuid != account.UserGuid)
@@ -92,12 +93,12 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AccountDto>> PostAccount(Guid userGuid, [FromBody] AccountForCreationDto accountForCreationDto)
+        public async Task<ActionResult<AccountDto>> PostAccount([FromBody] AccountForCreationDto accountForCreationDto)
         {
+            var userGuid = Guid.NewGuid();
             var account = mapper.Map<Account>(accountForCreationDto);
             account.UserGuid = userGuid;
 
@@ -108,11 +109,11 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteAccount(Guid userGuid, long id)
+        public async Task<IActionResult> DeleteAccount(long id)
         {
+            var userGuid = Guid.NewGuid();
             var account = await _context.Accounts.Where(a => a.UserGuid == userGuid && a.Id == id).FirstOrDefaultAsync();
             if (account == null)
             {
