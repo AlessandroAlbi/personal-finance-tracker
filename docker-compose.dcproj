@@ -3,10 +3,10 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>5a24ca4a-751f-46a4-ab71-47cc42c2629c</ProjectGuid>
-    <DockerLaunchAction>None</DockerLaunchAction>
+    <ProjectGuid>69aa4671-b0c0-4251-8555-dc5853095bff</ProjectGuid>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>personalfinancetracker.accounts.api</DockerServiceName>
+    <DockerServiceName>personalfinancetracker.webappgateway</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

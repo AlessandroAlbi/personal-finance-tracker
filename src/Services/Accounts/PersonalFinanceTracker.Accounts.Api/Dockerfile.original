@@ -8,9 +8,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["src/Services/Accounts/PersonalFinanceTracker.Accounts.Api/PersonalFinanceTracker.Accounts.Api.csproj", "src/Services/Accounts/PersonalFinanceTracker.Accounts.Api/"]
-COPY ["src/Services/Accounts/PersonalFinanceTracker.Accounts.Infrastructure/PersonalFinanceTracker.Accounts.Infrastructure.csproj", "src/Services/Accounts/PersonalFinanceTracker.Accounts.Infrastructure/"]
-COPY ["src/Services/Accounts/PersonalFinanceTracker.Accounts.Application/PersonalFinanceTracker.Accounts.Application.csproj", "src/Services/Accounts/PersonalFinanceTracker.Accounts.Application/"]
-COPY ["src/Services/Accounts/PersonalFinanceTracker.Accounts.Domain/PersonalFinanceTracker.Accounts.Domain.csproj", "src/Services/Accounts/PersonalFinanceTracker.Accounts.Domain/"]
 RUN dotnet restore "src/Services/Accounts/PersonalFinanceTracker.Accounts.Api/PersonalFinanceTracker.Accounts.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Accounts/PersonalFinanceTracker.Accounts.Api"

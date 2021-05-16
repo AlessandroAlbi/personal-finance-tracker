@@ -8,6 +8,7 @@ services:
       dockerfile: src/Services/Accounts/PersonalFinanceTracker.Accounts.Api/Dockerfile
     ports:
         - 32001:80
+        - 32002:443
     container_name: accountsapi
 
   sqlserver:
@@ -30,6 +31,26 @@ services:
     command: /bin/bash -c 'until /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P "Super!Complex!Password1234" -Q "create database Keycloak"; do sleep 5; done'
     container_name: sqlserverscripts
 
+  personalfinancetracker.login.api:
+    image: ${DOCKER_REGISTRY-}personalfinancetrackerloginapi
+    build:
+      context: .
+      dockerfile: src/Services/Login/PersonalFinanceTracker.Login.Api/Dockerfile
+    ports:
+        - 32003:80
+        - 32004:443
+    container_name: loginapi
+
+  personalfinancetracker.webappgateway:
+    image: ${DOCKER_REGISTRY-}personalfinancetrackerwebappgateway
+    build:
+      context: .
+      dockerfile: src/Gateways/WebAppGateway/PersonalFinanceTracker.WebAppGateway/Dockerfile
+    ports:
+        - 32005:80
+        - 32006:443
+    container_name: webappgatewayapi
+
   keycloak:
     image: quay.io/keycloak/keycloak:latest
     depends_on:
@@ -47,3 +68,4 @@ services:
         - DB_DATABASE=Keycloak
         - Dkeycloak.profile.feature.upload_scripts=enabled
     container_name: keycloak
+

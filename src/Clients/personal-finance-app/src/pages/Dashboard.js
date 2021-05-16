@@ -12,7 +12,7 @@ export default function Dashboard({token}) {
   // runned when component is rendered
   useEffect(() => {
     // errrori nel passarre il token vedre come fare
-    Axios.get("http://localhost:32001/api/Accounts", { headers: {"Authorization" : `Bearer ${token}`} }).then((response) => {
+    Axios.get("http://localhost:32001/api/Accounts", { headers: {"Authorization" : `Bearer ${token}`} }).then(response => {
       setAccounts(response.data);
     });
   }, []);

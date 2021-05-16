@@ -1,54 +1,35 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-async function loginUser(username, password) {
-  var details = {
-    username: username,
-    password: password,
-    grant_type: "password",
-    client_id: "react-app",
-    scope: "openid",
-  };
-
-  var formBody = [];
-  for (var property in details) {
-    var encodedKey = encodeURIComponent(property);
-    var encodedValue = encodeURIComponent(details[property]);
-    formBody.push(encodedKey + "=" + encodedValue);
-  }
-  formBody = formBody.join("&");
-
-  return fetch(
-    "http://localhost:8080/auth/realms/personal-finance-tracker/protocol/openid-connect/token",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body: formBody,
-    }
-  )
-    .then(function (response) {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return response.json();
-    })
-    .catch((err) => "err");
-}
-
+import Axios from "axios";
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  let [loginError, setLoginError] = useState();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser(username, password);
+    const token = await await Axios.post(
+      "https://localhost:32004/api/Authenticate/login",
+      {
+        username: username,
+        password: password,
+      }
+    ).then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        return "err";
+      }
+    );
 
     if (token !== "err") {
       setToken(token);
     } else {
-      window.location.reload();
+      loginError = setLoginError(() => {
+        return true;
+      });
     }
   };
 
@@ -56,9 +37,7 @@ export default function Login({ setToken }) {
     <div className="login-container">
       <div className="login-container-left">
         <h1 className="login-title">Login</h1>
-        <h2 className="login-subtitle">
-          Personal Finance Tracker
-        </h2>
+        <h2 className="login-subtitle">Personal Finance Tracker</h2>
       </div>
       <div className="login-container-right">
         <form className="login" onSubmit={handleSubmit}>
@@ -79,11 +58,14 @@ export default function Login({ setToken }) {
             />
           </label>
           <div>
-            <button type="submit">
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </div>
         </form>
+        <div>
+          {loginError ? (
+            <h2 style={{ color: "red" }}>Username or password are incorrect</h2>
+          ) : null}
+        </div>
       </div>
     </div>
   );

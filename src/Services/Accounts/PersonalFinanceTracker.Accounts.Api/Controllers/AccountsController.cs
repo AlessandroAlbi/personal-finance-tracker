@@ -35,8 +35,8 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccounts()
         {
-            var userGuid = new Guid("2090d106-eb86-4b82-9022-56f4ce652d85");
-            var accounts = mapper.Map<IEnumerable<AccountDto>>(await _context.Accounts.Where(a => a.UserGuid == userGuid).ToListAsync());
+            var userGuid = User.FindFirst("UserId")?.Value;
+            var accounts = mapper.Map<IEnumerable<AccountDto>>(await _context.Accounts.Where(a => a.UserGuid == new Guid(userGuid)).ToListAsync());
 
             if (!accounts.Any())
                 return NotFound();
@@ -45,6 +45,7 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(typeof(AccountDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -60,6 +61,7 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -93,6 +95,7 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -109,6 +112,7 @@ namespace PersonalFinanceTracker.Accounts.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAccount(long id)
